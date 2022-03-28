@@ -30,7 +30,7 @@ public class ConsoleProgress implements Runnable {
                  */
                 Thread.currentThread().interrupt();
             }
-            if (counter == 4) {
+            if (counter == chars.length) {
                 counter = 0;
             }
             System.out.print("\rLoading... " + chars[counter]);
