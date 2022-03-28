@@ -1,5 +1,7 @@
 package ru.job4j.concurrent;
-
+/*
+ thread waiting 
+ */
 public class Wget {
 
     public static void main(String[] args) {
