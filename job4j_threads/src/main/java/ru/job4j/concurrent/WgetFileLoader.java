@@ -28,8 +28,8 @@ public class WgetFileLoader implements Runnable {
             byte[] dataBuffer = new byte[1024];
             int bytesRead;
             int downloadData = 0;
-            Long startTime = System.currentTimeMillis();
-            Long startTimeBase = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
+            long startTimeBase = System.currentTimeMillis();
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
                 downloadData += bytesRead;
