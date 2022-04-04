@@ -13,7 +13,6 @@ public class SimpleBlockingQueue<T> {
     private final Queue<T> queue = new LinkedList<>();
 
     private final int capacity;
-    private int capacityCounter;
 
     public SimpleBlockingQueue(int capacity) {
         if (capacity < 0) {
@@ -22,28 +21,18 @@ public class SimpleBlockingQueue<T> {
         this.capacity = capacity;
     }
 
-    public synchronized void offer(T value) {
+    public synchronized void offer(T value) throws InterruptedException {
         while (isFull()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+            wait();
         }
         queue.offer(value);
-        capacityCounter++;
         notifyAll();
     }
 
-    public synchronized T poll() {
+    public synchronized T poll() throws InterruptedException {
         while (isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+            wait();
         }
-        capacityCounter--;
         T result = queue.poll();
         notifyAll();
         return result;
@@ -54,6 +43,6 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized boolean isFull() {
-        return capacityCounter == capacity;
+        return queue.size() == capacity;
     }
 }

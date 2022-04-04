@@ -15,12 +15,12 @@ public class ProducerConsumerStarter {
         Random random = new Random();
         Thread consumer = new Thread(() -> {
             while (true) {
-                Integer value = queue.poll();
-                if (logger.isInfoEnabled()) {
-                    logger.info(String.valueOf(value));
-                }
                 try {
+                    Integer value = queue.poll();
                     Thread.sleep(1000);
+                    if (logger.isInfoEnabled()) {
+                        logger.info(String.valueOf(value));
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -28,7 +28,11 @@ public class ProducerConsumerStarter {
         });
         Thread producer = new Thread(() -> {
             while (true) {
-                queue.offer(random.nextInt(100));
+                try {
+                    queue.offer(random.nextInt(100));
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         });
         consumer.start();
