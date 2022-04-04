@@ -9,7 +9,7 @@ public class ParallelSearch {
             = LoggerFactory.getLogger(ParallelSearch.class);
 
     public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(5);
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         final Thread consumer = new Thread(
                 () -> {
                     while (true) {
@@ -36,9 +36,8 @@ public class ParallelSearch {
                             e.printStackTrace();
                         }
                     }
-                    consumer.interrupt();
+                    consumer.stop();
                 }
-
         ).start();
     }
 }
