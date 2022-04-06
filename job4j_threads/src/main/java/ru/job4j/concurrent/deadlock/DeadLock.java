@@ -35,7 +35,7 @@ class Runner {
     public void firstThread() {
         for (int i = 0; i < 10000; i++) {
             lock1.lock();
-            //while this thread is waiting for lock2 to unlock, thread2 is waiting for lock1 to unlock.
+            /*while this thread is waiting for lock2 to unlock, thread2 is waiting for lock1 to unlock.*/
             lock2.lock();
             try {
                 Account.transfer(account1, account2, random.nextInt(100));
