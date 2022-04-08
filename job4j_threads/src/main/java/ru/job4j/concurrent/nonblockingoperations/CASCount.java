@@ -1,4 +1,4 @@
-package ru.job4j.concurrent.cas;
+package ru.job4j.concurrent.nonblockingoperations;
 
 import net.jcip.annotations.ThreadSafe;
 import org.slf4j.Logger;
